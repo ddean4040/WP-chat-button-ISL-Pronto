@@ -1,0 +1,70 @@
+variables:
+  # Configure mysql service (https://hub.docker.com/_/mysql/)
+  MYSQL_DATABASE: wordpress_tests
+  MYSQL_ROOT_PASSWORD: mysql
+
+before_script:
+  # Install dependencies
+
+  # update the docker
+  - apt-get clean
+  - apt-get -yqq update
+
+  # install the required packages for the running CI tests
+  - apt-get -yqqf install zip unzip subversion mariadb-client libmariadb-dev --fix-missing
+
+  # PHP extensions
+  - pecl channel-update pecl.php.net
+  - pecl install mcrypt
+  - |
+    if [[ $CI_JOB_NAME == *"PHP8"* ]]; then
+      docker-php-ext-enable mcrypt mysqli pdo_mysql intl gd zip bz2
+    else
+      docker-php-ext-enable mbstring mcrypt mysqli pdo_mysql intl gd zip bz2
+    fi
+
+  # Set up WordPress tests
+  - bash bin/install-wp-tests.sh wordpress_tests root mysql mysql latest true
+
+  # Install PHPCS and WPCS
+  - composer global require "squizlabs/php_codesniffer=*"
+  - composer global require "dealerdirect/phpcodesniffer-composer-installer"
+  - composer global require "wp-coding-standards/wpcs"
+  - composer global require "automattic/vipwpcs"
+  - composer global require "sirbrillig/phpcs-variable-analysis"
+  - composer global require "phpunit/phpunit ^7" --ignore-platform-reqs
+  - phpcs --config-set installed_paths $HOME/.composer/vendor/automattic/vipwpcs,$HOME/.composer/vendor/wp-coding-standards/wpcs,$HOME/.composer/vendor/sirbrillig/phpcs-variable-analysis
+  - phpcs --config-set ignore_errors_on_exit 1
+  - phpcs --config-set ignore_warnings_on_exit 1
+
+PHPunit:PHP7.2:MySQL:
+  image: roadiz/php72-runner
+  services:
+    - mysql:5.6
+  script:
+  - phpcs
+  - /root/.composer/vendor/bin/phpunit
+
+PHPunit:PHP7.3:MySQL:
+  image: roadiz/php73-runner
+  services:
+    - mysql:5.6
+  script:
+  - phpcs
+  - /root/.composer/vendor/bin/phpunit
+
+PHPunit:PHP7.4:MySQL:
+  image: roadiz/php74-runner
+  services:
+    - mysql:5.6
+  script:
+  - phpcs
+  - /root/.composer/vendor/bin/phpunit
+
+PHPunit:PHP8.0:MySQL:
+  image: roadiz/php80-runner
+  services:
+    - mysql:5.6
+  script:
+  - phpcs
+  - /root/.composer/vendor/bin/phpunit
