@@ -1,5 +1,5 @@
 === Chat button for ISL Pronto ===
-Contributors: (this should be a list of wordpress.org userid's)
+Contributors: ddean
 Tags: chat, isl-pronto
 Requires at least: 5.0
 Tested up to: 5.6
