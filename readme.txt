@@ -36,13 +36,13 @@ The plugin also includes shortcode support in case you want to have visitors on 
 
 = What should my script URL be? =
 
-If you are using the cloud service, you don't need to change the script path.
-If you are using a conference proxy, ask your administrator for the path.
+If you are using the cloud service, you don't need to change the script URL.
+If you are using a conference proxy, ask your administrator for the right URL.
 
 = My offline image works but the online image is not what I uploaded. Why? =
 
-If you are using a conference proxy, make sure your administrator has the image path you plan to use.
-Also be sure your `domain` is set correctly.
+If you are using a conference proxy, make sure your administrator knows the image path you plan to use.
+Also be sure your `domain` value is set correctly.
 
 == Changelog ==
 
