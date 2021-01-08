@@ -1,13 +1,13 @@
 <?php 
 /**
  * Plugin Name:       Chat button for ISL Pronto
- * Plugin URI:        
+ * Plugin URI:        https://github.com/ddean4040/WP-chat-button-ISL-Pronto
  * Description:       Render an ISL Pronto chat button on your site
  * Version:           1.0
  * Requires at least: 5.0
  * Requires PHP:      7.2
  * Author:            David Dean
- * Author URI:        
+ * Author URI:        https://github.com/ddean4040/
  * License:           GPLv2
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       dd-isl-pronto
