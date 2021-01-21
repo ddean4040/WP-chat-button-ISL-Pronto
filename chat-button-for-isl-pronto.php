@@ -118,8 +118,8 @@ if ( ! class_exists( 'DD_ISLPronto' ) ) {
 			
 			// Render the chat button.
 			?>
-			<a href="<?= $attrs['offlineurl'] ?>" id="islpronto_link" <?= $position_style ?>>
-			  <img alt="Live chat" id="islpronto_image" src="<?= $attrs['imagepath'] ?>/islpronto-message.jpg" style="border:none" />
+			<a href="<?= esc_url( $attrs['offlineurl'] ) ?>" id="islpronto_link" <?= $position_style ?>>
+			  <img alt="Live chat" id="islpronto_image" src="<?= esc_url( $attrs['imagepath'] ) ?>/islpronto-message.jpg" style="border:none" />
 			</a>
 			<?php 
 			
@@ -161,7 +161,7 @@ if ( ! class_exists( 'DD_ISLPronto' ) ) {
 				// Re-add the script to the end of the page with the new params.
 				$my_atts['scripturl'] = $this->build_script_url( $my_atts['scripturl'], $my_atts['domain'], $my_atts['filter'] );
 				
-				wp_register_script( 'islpronto_script', apply_filters( 'dd_isl_pronto_scripturl', $my_atts['scripturl'] ), array(), false, true);
+				wp_register_script( 'islpronto_script', esc_url( apply_filters( 'dd_isl_pronto_scripturl', $my_atts['scripturl'] ) ), array(), false, true);
 			}
 			
 			// Don't show the global button if we are showing it in a shortcode.
@@ -187,7 +187,7 @@ if ( ! class_exists( 'DD_ISLPronto' ) ) {
 			// Add the script to the end of the page.
 			$attrs['scripturl'] = $this->build_script_url( $attrs['scripturl'], $attrs['domain'], $attrs['filter'] );
 			
-			wp_register_script( 'islpronto_script', apply_filters( 'dd_isl_pronto_scripturl', $attrs['scripturl'] ), array(), false, true );
+			wp_register_script( 'islpronto_script', esc_url( apply_filters( 'dd_isl_pronto_scripturl', $attrs['scripturl'] ) ), array(), false, true );
 		}
 		
 		/**
